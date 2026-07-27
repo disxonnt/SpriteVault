@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPRITE VAULT — Fortnite Sprite Tracker</title>
+<meta name="description" content="Track, filter and share your Fortnite sprite collection.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="bg-glow" aria-hidden="true"></div>
+
+<div id="shareBanner" class="share-banner hidden">
+  <span class="share-banner-icon">👀</span>
+  <span>Viewing a shared vault — showing collected sprites only.</span>
+  <a href="#" id="goToMyVault" class="share-banner-link">Go to my own vault →</a>
+</div>
+
+<header class="topbar">
+  <div class="brand">
+    <img src="siteimages/mascot.png" alt="" class="brand-mascot" onerror="this.style.display='none'">
+    <div>
+      <h1 class="brand-title">SPRITE <span class="holo-text">VAULT</span></h1>
+      <p class="brand-sub">Fortnite Sprite Collection Tracker</p>
+    </div>
+  </div>
+
+  <div class="progress-cluster">
+    <div class="progress-card">
+      <div class="progress-label">
+        <span>Collected</span>
+        <span class="mono" id="collectStat">0 / 0</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill fill-collect" id="collectFill"></div></div>
+    </div>
+    <div class="progress-card">
+      <div class="progress-label">
+        <span>Mastered</span>
+        <span class="mono" id="masterStat">0 / 0</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill fill-master" id="masterFill"></div></div>
+    </div>
+  </div>
+</header>
+
+<nav class="actionbar" id="actionbar">
+  <button class="action-btn" data-action="missing">
+    <span class="action-icon">🖼️</span> Generate Missing
+  </button>
+  <button class="action-btn" data-action="collection">
+    <span class="action-icon">📦</span> Generate Collection
+  </button>
+  <button class="action-btn" data-action="unmastered">
+    <span class="action-icon">⏳</span> Generate Unmastered
+  </button>
+  <button class="action-btn" data-action="mastered">
+    <span class="action-icon">👑</span> Generate Mastered
+  </button>
+  <button class="action-btn action-btn-share" id="shareBtn">
+    <span class="action-icon">🔗</span> Share Vault
+  </button>
+</nav>
+<p class="master-hint">👑 Tip: right-click a collected sprite (or press and hold on mobile) to mark it mastered.</p>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="panel">
+      <label class="panel-label" for="searchBox">Search</label>
+      <input type="text" id="searchBox" class="search-input" placeholder="Search a sprite...">
+    </div>
+
+    <div class="panel">
+      <label class="panel-label" for="themeFilter">Theme</label>
+      <select id="themeFilter" class="select-input">
+        <option value="all">All themes</option>
+        <option value="Basic">Basic</option>
+        <option value="Gold">Gold</option>
+        <option value="Gummy">Gummy</option>
+        <option value="Galaxy">Galaxy</option>
+        <option value="Holofoil">Holofoil</option>
+        <option value="Cube">Cube</option>
+      </select>
+    </div>
+
+    <div class="panel">
+      <label class="panel-label" for="rarityFilter">Rarity</label>
+      <select id="rarityFilter" class="select-input">
+        <option value="all">All rarities</option>
+        <option value="Rare">Rare</option>
+        <option value="Epic">Epic</option>
+        <option value="Legendary">Legendary</option>
+        <option value="Mythic">Mythic</option>
+        <option value="Special">Special (variant)</option>
+      </select>
+    </div>
+
+    <div class="panel">
+      <span class="panel-label">Collection status</span>
+      <div class="segmented" id="statusFilter">
+        <button class="seg-btn active" data-status="all">All</button>
+        <button class="seg-btn" data-status="owned">Owned</button>
+        <button class="seg-btn" data-status="unowned">Unowned</button>
+      </div>
+    </div>
+
+    <div class="panel toggles">
+      <label class="toggle-row"><span>Hide mastered</span><input type="checkbox" id="hideMastered"><span class="toggle-ui"></span></label>
+      <label class="toggle-row"><span>Group by theme</span><input type="checkbox" id="groupByTheme"><span class="toggle-ui"></span></label>
+      <label class="toggle-row"><span>Low fidelity mode</span><input type="checkbox" id="lowFidelity"><span class="toggle-ui"></span></label>
+    </div>
+
+    <div class="panel creator-card">
+      <p class="creator-eyebrow">Made by</p>
+      <div class="creator-row">
+        <img src="siteimages/creator.jpg" alt="" class="creator-avatar" onerror="this.style.display='none'">
+        <div>
+          <p class="creator-name">disxonnt</p>
+          <a href="https://www.youtube.com/@disxonnt" target="_blank" rel="noopener" class="creator-link">YouTube Channel</a>
+        </div>
+      </div>
+      <a href="https://www.youtube.com/@disxonnt?sub_confirmation=1" target="_blank" rel="noopener" class="sub-btn">Subscribe</a>
+      <div class="creator-code">
+        <span class="creator-code-label">Support Code</span>
+        <span class="creator-code-value">disxonnt</span>
+      </div>
+    </div>
+
+    <div class="panel discord-card">
+      <p class="creator-eyebrow">Sprite Trading</p>
+      <p class="discord-desc">Join the Discord to trade sprites with other collectors.</p>
+      <a href="https://discord.gg/uXeSdqbsPf" target="_blank" rel="noopener" class="discord-btn">
+        <span class="action-icon">💬</span> Join the Trading Server
+      </a>
+    </div>
+  </aside>
+
+  <main class="grid-wrap">
+    <div id="spriteGrid" class="sprite-grid"></div>
+    <p id="emptyState" class="empty-state hidden">No sprites match your filters. Try clearing search or theme.</p>
+  </main>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
